@@ -1,0 +1,37 @@
+server:
+  port: 8070
+spring:
+  application:
+    name: resilience4j-service
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      myCircuitBreakerConfig:
+        failure-rate-threshold: 30
+        wait-duration-in-open-state: 2000ms
+        minimum-number-of-calls: 200
+        permitted-number-of-calls-in-half-open-state: 3
+        sliding-window-size: 10
+        slow-call-duration-threshold: 1000ms
+        sliding-window-type: TIME_BASED
+        automatic-transition-from-open-to-half-open-enabled: true
+        record-exceptions:
+          - java.lang.Exception
+    instances:
+      myCircuitBreaker:
+        base-config: myCircuitBreakerConfig
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8080/eureka/
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 1000
+        readTimeout: 1000
+  circuitbreaker:
+    enabled: true

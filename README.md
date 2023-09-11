@@ -43,3 +43,19 @@
 如何保证负载均衡是个不得不去考虑的问题。负载均衡可以增加系统的可用性和扩展性，
 当我们使用RestTemplate来调用其他服务时，Ribbon可以很方便的实现负载均衡功能。
 ```
+# 三、SpringCloud Feign 声明式服务调用以及服务降级
+## 1.创建resilience4j-service模块，导入相关依赖
+![img_17.png](img_17.png)
+## 2.配置文件中配置resilience4j相关信息
+![img_18.png](img_18.png)
+## 3.创建UserClient接口用于声明式服务调用，并指定fallback类或方法
+![img_19.png](img_19.png)
+## 4.创建UserController类，使用UserClient接口进行服务调用
+![img_20.png](img_20.png)
+## 5.可以看到服务调用成功，并且打印了fallback的信息
+![img_23.png](img_23.png)
+## 6.在ribbon-service中使用loadbalancer进行服务调用，使用随机算法，调用10次，可以看到负载均衡效果
+![img_21.png](img_21.png)
+![img_22.png](img_22.png)
+
+
