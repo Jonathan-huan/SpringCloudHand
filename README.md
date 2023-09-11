@@ -58,4 +58,33 @@
 ![img_21.png](img_21.png)
 ![img_22.png](img_22.png)
 
+# 四、SpringCloud Config 配置中心和SpringCloud Gateway 网关
+## 1.创建config-server模块，导入相关依赖
+![img_24.png](img_24.png)
+## 2.配置文件中配置git仓库地址
+![img_25.png](img_25.png)
+## 3.启动config-server,直接访问远程仓库文件，成功访问
+![img_26.png](img_26.png)
+## 4.创建config-client模块，导入相关依赖
+![img_27.png](img_27.png)
+## 5.配置文件中配置config-server地址
+![img_28.png](img_28.png)
+## 6.客户端编写接口，通过@Value注解获取配置文件中的值
+![img_29.png](img_29.png)
+## 7.启动config-server和config-client，访问客户端接口，可以看到获取到了配置文件中的值
+![img_30.png](img_30.png)
+## 8.创建gateway-service模块，导入相关依赖
+![img_31.png](img_31.png)
+## 9.配置文件中配置gateway相关信息和路由规则（注意要设置spring.main.web-application-type=reactive）
+![img_32.png](img_32.png)
+## 10.启动gateway-service和user-service，访问gateway-service的接口，可以看到路由规则生效
+![img_33.png](img_33.png)
+
+```agsl
+学习总结：在微服务架构中，往往会有一个配置中心，每个微服务都会从配置中心获取自己的配置信息，
+这样当配置信息发生变化时，只需要修改配置中心的配置文件，不需要重启服务，就可以实现配置的动态更新。
+网关是微服务架构中的一个重要组件，它可以实现路由转发、权限校验、限流等功能，SpringCloud Gateway是SpringCloud提供的网关组件，
+它基于异步非阻塞模型，性能更好，可以实现动态路由、限流、熔断等功能。
+```
+
 

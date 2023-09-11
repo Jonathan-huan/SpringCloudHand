@@ -14,7 +14,6 @@ public class UserController {
     private final static Random random = new Random();
     @GetMapping("/{id}")
     public String user(@PathVariable Long id) {
-        System.out.println("user-service: " + id);
         return "user-service: " + id;
     }
 
